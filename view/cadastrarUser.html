@@ -1,0 +1,24 @@
+<div>
+  <h2>Cadastrar Usuário
+    <h2>
+      <div class="form-group">
+        <label for="usr">fistName:</label>
+        <input type="text" class="form-control" ng-model="vm.pilates.fistName">
+      </div>
+      <div class="form-group">
+        <label for="usr">lastName:</label>
+        <input type="text" class="form-control" ng-model="vm.pilates.lastName">
+      </div>
+      <div class="form-group">
+        <label for="usr">email:</label>
+        <input type="text" class="form-control" ng-model="vm.pilates.email">
+      </div>
+      <div class="form-group">
+        <label for="usr">perfilImage:</label>
+        <input type="text" class="form-control" ng-model="vm.pilates.perfilImage">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="closeThisDialog()">Cancelar</button>
+        <button type="button" class="btn btn-primary" ng-click="confirm(vm.pilates)">Salvar</button>
+      </div>
+</div>

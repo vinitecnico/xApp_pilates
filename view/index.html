@@ -1,0 +1,80 @@
+<html ng-app="xApp">
+<head>
+    <meta charset="UTF-8">
+    <title>xApp</title>
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <script src="../bower_components/angular/angular.min.js"></script>
+	<link rel="stylesheet" href="../bower_components/ng-dialog/css/ngDialog.min.css">
+	<link rel="stylesheet" href="../bower_components/ng-dialog/css/ngDialog-theme-default.min.css">
+	<script src="../bower_components/ng-dialog/js/ngDialog.js"></script>	
+    <script src="../js/app.js"></script>
+    <script src="../js/controllers/pilatesController.js"></script>
+    <script src="../js/factories/pilatesfactory.js"></script>
+    <script src="../js/services/pilatesService.js"></script>
+</head>
+<body ng-controller="pilatesController as vm">
+    <div class="container" ng-init="vm.init();">
+	<div class="row">
+		<section class="content">
+			<h1>xApp</h1>
+			<div class="col-md-8 col-md-offset-2">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="pull-right">
+							<div class="btn-group">
+								<button type="button" class="btn btn-success btn-filter" ng-click="vm.cadastrarUser();">Cadastrar</button>								
+							</div>
+						</div>
+						<div class="table-container">
+							<table class="table table-filter">
+								<tbody>
+									<tr ng-repeat="pilate in vm.pilates | orderBy: '-createDate'">										
+										<td>
+											<a href="javascript:;" class="star" title="{{pilate.isPremium ? 'Conta Premium' : 'Conta Normal'}}">
+												<i class="glyphicon glyphicon-star" ng-class="{premium: pilate.isPremium}"></i>
+											</a>
+										</td>
+										<td>
+											<div class="media" ng-class="{isPremium: pilate.isPremium}">
+												<a href="#" class="pull-left">
+													<img ng-src="{{pilate.perfilImage}}" alt="{{pilate.perfilImage ? pilate.fistName : 'SEM FOTO'}}" title="{{pilate.perfilImage ? pilate.fistName : 'SEM FOTO'}}" class="media-photo">
+												</a>
+												<div class="media-body">
+													<span class="media-meta pull-right"></span>
+													<h4 class="title">
+														{{pilate.fistName ? pilate.fistName : 'SEM NOME'}} {{pilate.lastName | limitTo: 1 }}{{pilate.lastName.length > 1 ? '...' : ''}}                                                        
+														<span class="pull-right">
+                                                            {{pilate.email}} - {{pilate.createDate | date:'dd/MM/yyyy'}} - <a class="btn btn-link" data-toggle="collapse" data-target="#{{pilate.id}}">Atividades</a>
+                                                        </span>                                                                                                                
+													</h4>                                                    
+                                                    <div id="{{pilate.id}}" class="collapse">
+                                                        <a ng-click="vm.cadastrarActivity(pilate.id)">Cadastrar Atividade</a>
+														<div class="activity" ng-repeat="activity in pilate.activities | orderBy: '-createDate'">
+															Atividade: {{activity.name}} - <a ng-click="vm.updateStatus(pilate.id, activity.id);" ng-class="{'disabled' : activity.status =='concluido' }">{{activity.status}}</a> - {{activity.createDate | date:'dd/MM/yyyy HH:mm:ss'}} - <i class="glyphicon glyphicon-remove remove" ng-click="vm.removeActivity(pilate.id, activity.id);"></i>  
+														</div>
+                                                    </div>
+												</div>
+											</div>
+										</td>
+									</tr>									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="content-footer">
+					<p>
+						Page © - 2016 <br>
+						Powered By <a href="" target="_blank">Vinicius Rodrigues</a>
+					</p>
+				</div>
+			</div>
+		</section>
+		
+	</div>
+</div>
+</body>
+</html>
